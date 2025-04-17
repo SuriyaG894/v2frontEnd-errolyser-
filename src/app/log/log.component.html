@@ -1,0 +1,35 @@
+<div class="container mt-4">
+    <div class="table-responsive">
+        <table class="table custom-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Timestamp</th>
+                    <th>Level</th>
+                    <th>Thread</th>
+                    <th>Exception Name</th>
+                    <th>Error Message</th>
+                    <th>Stack Trace</th>
+                </tr>
+            </thead>
+            <tbody >
+                <tr *ngFor="let data of logData">
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.timestamp }}</td>
+                    <td>{{ data.level }}</td>
+                    <td>{{ data.thread }}</td>
+                    <td>{{ data.exceptionName }}</td>
+                    <td>{{ data.errorMessage }}</td>
+                    <td>
+                        <button type="button" (click)="openDialog(data.stackTrace)" class="btn btn-primary" style="background-color:#1e1e2f">
+                            View Trace
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

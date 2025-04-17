@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%;background-color: #F7F9FC; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Make sure this overrides Bootstrap */
+table.table.table-striped tbody tr:nth-child(odd) {
+    background-color: green !important;
+  }
+  
+  table.table.table-striped tbody tr:nth-child(even) {
+    background-color: yellow !important;
+  }
+  

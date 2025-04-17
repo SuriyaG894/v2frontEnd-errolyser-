@@ -1,0 +1,110 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f2f2f2;
+}
+
+.back-btn {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    color: #3498db;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    transition: color 0.2s ease;
+  }
+  
+  .back-btn:hover {
+    color: #1d6fa5;
+  }
+  
+  
+/* Full-screen background layer */
+#outerlayer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #e0e0e0;
+    z-index: -1;
+    
+        margin-top: 30px;
+    
+}
+
+/* Centered container */
+#design {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 40px 50px;
+    width: 80%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+/* Title style */
+#title {
+    font-size: 28px;
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+}
+
+/* Headings */
+#design h1 {
+    font-size: 20px;
+    color: #34495e;
+    margin: 20px 0 5px;
+}
+
+/* Paragraphs (dynamic content) */
+#design p {
+    font-size: 16px;
+    color: #555;
+    background-color: #fafafa;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    
+}
+
+/* Example section */
+.example {
+    background-color: #ededed;
+    padding: 15px;
+    border-left: 5px solid #0eae067b;
+    border-radius: 8px;
+    margin-top: 25px;
+}
+
+.exampledata h1 {
+    font-size: 18px;
+    margin-top: 15px;
+   
+}
+
+.exampledata p {
+    background-color: #eefbee;
+    color: #333;
+}

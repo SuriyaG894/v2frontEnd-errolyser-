@@ -1,0 +1,23 @@
+<div class="container">
+
+    <h2 class="text-center">Error List</h2>
+    <!-- <input type="text" [(ngModel)] = "searchText"> -->
+    <table class="table table-bordered table mx-auto">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Know more</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let error of errors" class="text-center">
+                <td>{{ error.id }}</td>
+                <td>{{ error.title }}</td>
+                <td>{{ error.category }}</td> 
+                <td><a class="btn btn-primary mx-2" [routerLink]="['/detailedblog']" [queryParams]="{Id: error.id}">Know more</a>
+            </tr>
+        </tbody>
+    </table>
+</div>

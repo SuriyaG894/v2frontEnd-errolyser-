@@ -1,0 +1,77 @@
+<div class="error-analyzer-container">
+  <h3>Error Analyzer</h3>
+
+  <div class="form-container">
+    <label for="errorTextArea">Paste your error message:</label>
+    <textarea id="errorTextArea" [(ngModel)]="errorText" (ngModelChange)="onSearchChange()"
+      placeholder="Paste your error message here..."></textarea>
+
+    <div class="button-container">
+      <button [disabled]="!errorDetails" (click)="onSubmit()" class="submit-button">
+        Analyze & Save Error
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="showResult && errorDetails" class="table-responsive mt-4">
+    <table class="table table-bordered mx-auto" style="width: 70%;">
+      <thead class="table-dark text-center">
+        <tr>
+          <th style="">Field</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Error ID</td>
+          <td>{{ errorDetails.id || 'N/A' }}</td>
+        </tr>
+        <tr>
+          <td>Timestamp</td>
+          <td>{{ errorDetails.timestamp ? (errorDetails.timestamp | date:'medium') : 'N/A' }}</td>
+        </tr>
+        <tr>
+          <td>Exception Type</td>
+          <td>{{ errorDetails.exceptionType || 'N/A' }}</td>
+        </tr>
+        <tr>
+          <td>Error Type</td>
+          <td>{{ errorDetails.errorType || 'N/A' }}</td>
+        </tr>
+        <tr>
+          <td>Error Message</td>
+          <td>{{ errorDetails.errorMessage || 'N/A' }}</td>
+        </tr>
+        <tr>
+          <td>File</td>
+          <td>{{ errorDetails.fileName || 'N/A' }}</td>
+        </tr>
+        <tr>
+          <td>Line Number</td>
+          <td>{{ errorDetails.lineNumber || 'N/A' }}</td>
+        </tr>
+        <tr>
+          <td>Relevant Code</td>
+          <td>
+            <pre *ngIf="errorDetails.relevantCode"><code>{{ errorDetails.relevantCode }}</code></pre>
+            <span *ngIf="!errorDetails.relevantCode">N/A</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Stack Trace</td>
+          <td>
+            <ng-container *ngIf="errorDetails.stackTrace && errorDetails.stackTrace.length > 0; else noStackTrace">
+              <ul class="text-start">
+                <li *ngFor="let trace of errorDetails.stackTrace">{{ trace }}</li>
+              </ul>
+            </ng-container>
+            <ng-template #noStackTrace>
+              <span>N/A</span>
+            </ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

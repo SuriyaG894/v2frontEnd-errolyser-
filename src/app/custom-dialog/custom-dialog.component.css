@@ -1,0 +1,17 @@
+/* custom-dialog.component.css */
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  table, th, td {
+    border: 1px solid #ccc;  /* Light border for the table */
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: left;
+  }
+.mat-dialog-content{
+    width:fit-content;
+}

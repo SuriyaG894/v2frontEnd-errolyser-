@@ -1,0 +1,35 @@
+<div class="layout-container">
+    <!-- Sidebar -->
+    <div class="sidebar" [class.collapsed]="isCollapsed">
+      <button mat-icon-button class="toggle-btn" (click)="toggleSidebar()">
+        <mat-icon>menu</mat-icon>
+      </button>
+  
+      <!-- Menu Items with routing -->
+      <a
+        *ngFor="let item of menuItems"
+        [routerLink]="item.route"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="menu-item"
+      >
+        <mat-icon>{{ item.icon }}</mat-icon>
+        <span *ngIf="!isCollapsed">{{ item.label }}</span>
+      </a>
+    </div>
+  
+    <!-- Main Content Area -->
+    <div class="main-content" [class.expanded]="!isCollapsed">
+      <div class="navbar">
+        <img src="./assets/logo.png" width="40" />
+        <h2>ERRORLYZER <i style="font-size: 10px;">Debug Less. Build More.</i></h2>
+        <span class="spacer"></span>
+        <mat-icon style="color:#1e1e2f">logout</mat-icon>
+      </div>
+  
+      <div class="page-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+  

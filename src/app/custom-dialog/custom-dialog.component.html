@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>StackTrace</h2>
+
+<mat-dialog-content>
+  <table style="border:1px" width="100%" style="border-collapse: collapse; text-align: left;">
+    <thead>
+      <tr>
+        <th>Class Name</th>
+        <th>Method Name</th>
+        <th>File Name</th>
+        <th>Line Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data">
+        <td>{{ item.className }}</td>
+        <td>{{ item.methodName }}</td>
+        <td>{{ item.fileName }}</td>
+        <td>{{ item.lineNumber }}</td>
+      </tr>
+    </tbody>
+  </table>
+</mat-dialog-content>
+
+<mat-dialog-actions style="align-items:flex-end;">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
