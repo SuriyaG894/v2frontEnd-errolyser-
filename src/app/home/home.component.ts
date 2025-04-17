@@ -5,10 +5,14 @@ import { ErrorServiceService } from '../services/error-service.service';
 import { ErrorAnalyzerServiceService } from '../services/error-analyzer-service.service';
 import { FileSharingService } from '../file-sharing.service';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { LogCountServiceService } from '../log-count-service.service';
 
 @Component({
   selector: 'app-home',
-  imports: [MatIconModule,CommonModule],
+  standalone: true, // ✅ Add this
+  imports: [MatIconModule,CommonModule,RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -17,10 +21,10 @@ export class HomeComponent implements OnInit{
   lastLoggedConsole:string;
   logFileName:string;
   logUpLoads?:string = "";
-  constructor(private errorService:ErrorServiceService,private errorAnalyzerService:ErrorAnalyzerServiceService,private fileService: FileSharingService){
+  constructor(private errorService:ErrorServiceService,private errorAnalyzerService:ErrorAnalyzerServiceService,private fileService: FileSharingService,private logCountService:LogCountServiceService){
     this.lastLoggedConsole = "";
     this.logFileName = "";
-    this.logUpLoads = "0";
+    this.logUpLoads = "1";
   }
 
   ngOnInit(): void {
@@ -28,6 +32,10 @@ export class HomeComponent implements OnInit{
       this.fileService.fileName$.subscribe(name => {
         this.logFileName = name;
       });
+      this.logCountService.logCount$.subscribe(count=>{
+        this.logUpLoads = count;
+      })
+      // this.logUpLoads = this.cookieService.get('counter');
       
       
   }

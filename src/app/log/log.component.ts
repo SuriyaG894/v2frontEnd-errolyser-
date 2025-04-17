@@ -8,6 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { CustomDialogComponent } from '../custom-dialog/custom-dialog.component';
 import { IStackTrace } from '../istack-trace';
 import { FileSharingService } from '../file-sharing.service';
+import { CookieService } from 'ngx-cookie-service';
+import { LogCountServiceService } from '../log-count-service.service';
 
 
 @Component({
@@ -24,7 +26,7 @@ export class LogComponent implements OnInit{
 
     logData:ILogParser[]=[];
 
-    constructor(private parserService:LogParserServiceService,private fileService:FileSharingService){
+    constructor(private parserService:LogParserServiceService,private fileService:FileSharingService,private cookieService:CookieService,private logCountService:LogCountServiceService){
       
     }
 
@@ -68,6 +70,8 @@ export class LogComponent implements OnInit{
       this.selectedFile = input.files[0];
       this.fileService.updateFileName(this.selectedFile.name);
       this.counter++;
+       this.logCountService.updateLogCount(this.counter.toString());
+      // this.cookieService.set('counter', this.counter.toString());
       console.log("File selected:", this.selectedFile.name);
       this.fileup = true;
     }
