@@ -1,6 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+
 table{
     overflow-x: auto;
 }
-
-
+.btn{
+    border-radius: 0;
+}
+.log-header{
+    font-size: 48px;
+    color: #2F3542;
+}
   
+.slogan {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+  }
+
+  ::ng-deep .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #e8f5e9 !important; /* Light green */
+  }
+  
+  ::ng-deep .table-striped tbody tr:nth-of-type(even) {
+    background-color: #fce4ec !important; /* Light pink */
+  }
+  ::ng-deep .table-striped tbody tr:hover {
+    background-color: #d1c4e9 !important; /* Light purple on hover */
+  }
+    

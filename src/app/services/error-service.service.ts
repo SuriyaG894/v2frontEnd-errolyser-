@@ -14,6 +14,8 @@ export class ErrorServiceService {
   public addErrors(error: Error): Observable<any> {
     return this.http.post(`${this.baseUrl}/addErrors`, error);
   }
+
+  // Tell to santhan
   
   public getAllErrors(): Observable<any> {
     return this.http.get(`${this.baseUrl}/getAllErrors`);

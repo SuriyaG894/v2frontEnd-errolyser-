@@ -2,11 +2,15 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ErrorDetails } from '../models/error-details.model';
+import { ErrorDTO } from '../models/error-dto.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorAnalyzerServiceService {
+  saveNewError(errorData: ErrorDTO):Observable<any> {
+    return this.http.post(`${this.baseUrl}/addErrors`,errorData)
+  }
 
   private baseUrl = 'http://localhost:8080'; // Endpoint for Spring Boot backend
 

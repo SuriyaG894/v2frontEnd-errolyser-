@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ErrorServiceService } from '../services/error-service.service';
-import { ErrorDTO } from '../models/error-dto.model'; 
+import { ErrorDTO } from '../models/error-dto.model';
 import { RouterLink, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ErrorAnalyzerServiceService } from '../services/error-analyzer-service.service';

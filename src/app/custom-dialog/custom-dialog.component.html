@@ -12,10 +12,15 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of data">
-        <td>{{ item.className }}</td>
+        <ng-container *ngIf="item.className && item.className.length > 0 && item.methodName.length > 0 && item.fileName.length > 0;else noStack">
+          <td>{{ item.className }}</td>
         <td>{{ item.methodName }}</td>
         <td>{{ item.fileName }}</td>
         <td>{{ item.lineNumber }}</td>
+        </ng-container>
+        <ng-template #noStack>
+            <td>No stack trace info available</td>
+        </ng-template>
       </tr>
     </tbody>
   </table>

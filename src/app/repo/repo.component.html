@@ -1,3 +1,31 @@
 <div class="container">
-    <p>Repo Page Works</p>
+    <h2 class="text-center">Repository / Community</h2>
+    <div class="c">
+        <a class="btn btn-primary" style="height: 40px;padding: 7px;" routerLink="/addNewError" routerLinkActive="active" >Add New Error</a>
+        <input type="text" [(ngModel)]="searchText" (ngModelChange)="filterErrors()" class="form-control my-3" placeholder="Search errors...">
+    </div>
+
+<table class="table table-bordered table mx-auto">
+  <thead class="table-dark text-center">
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Know more</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let error of filteredErrors" class="text-center">
+      <td>{{ error.id }}</td>
+      <td>{{ error.title }}</td>
+      <td>{{ error.category }}</td>
+      <td>
+        <a class="btn btn-primary mx-2" [routerLink]="['/detailedblog']" [queryParams]="{Id: error.id}">
+          Know more
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 </div>

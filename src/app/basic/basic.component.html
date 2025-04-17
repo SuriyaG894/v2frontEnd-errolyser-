@@ -1,24 +1,34 @@
 <div class="error-analyzer-container">
-  <h3>Error Analyzer</h3>
+  <h3>CONSOLE</h3>
+
+  <a><i>Drop your console chaos here-- we'll turn it into clarity. Instantly decode errors in a clean readable format.</i></a>
 
   <div class="form-container">
-    <label for="errorTextArea">Paste your error message:</label>
+    <h2 class="text-center">Paste your code here</h2>
     <textarea id="errorTextArea" [(ngModel)]="errorText" (ngModelChange)="onSearchChange()"
       placeholder="Paste your error message here..."></textarea>
-
+    <small>Note: Place full error, don't cut it short.</small>
     <div class="button-container">
       <button [disabled]="!errorDetails" (click)="onSubmit()" class="submit-button">
         Analyze & Save Error
       </button>
     </div>
   </div>
+  <div *ngIf="isSaving" class="loading">
+    <div class="spinner"></div>
+    <span>Saving error details...</span>
+  </div>
 
+  <div *ngIf="saveMessage" class="save-message" 
+       [ngClass]="{'success': saveMessage.includes('successfully'), 'error': saveMessage.includes('Failed')}">
+    {{ saveMessage }}
+  </div>
   <div *ngIf="showResult && errorDetails" class="table-responsive mt-4">
     <table class="table table-bordered mx-auto" style="width: 70%;">
       <thead class="table-dark text-center">
         <tr>
-          <th style="">Field</th>
-          <th>Value</th>
+          <th style="width: 300px;">Field</th>
+          <th >Value</th>
         </tr>
       </thead>
       <tbody>
@@ -73,5 +83,4 @@
       </tbody>
     </table>
   </div>
-
-</div>
+  </div>

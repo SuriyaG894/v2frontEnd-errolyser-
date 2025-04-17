@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomDialogComponent } from '../custom-dialog/custom-dialog.component';
 import { IStackTrace } from '../istack-trace';
+import { FileSharingService } from '../file-sharing.service';
 
 
 @Component({
@@ -17,10 +18,14 @@ import { IStackTrace } from '../istack-trace';
 })
 export class LogComponent implements OnInit{
 
+    showTable:boolean= false;
+    fileup:boolean=false;
+    counter:number = 0;
 
     logData:ILogParser[]=[];
 
-    constructor(private parserService:LogParserServiceService){
+    constructor(private parserService:LogParserServiceService,private fileService:FileSharingService){
+      
     }
 
     getLog(){
@@ -45,6 +50,52 @@ export class LogComponent implements OnInit{
     height: '80%',
     });
     
+  }
+
+  selectedFile: File | null = null;
+
+  onFileChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.parserService.deletePreviousLog().subscribe({
+      next: (response) => {
+        console.log('POST success:', response);
+      },
+      error: (error) => {
+        console.error('POST error:', error);
+      }
+    });
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+      this.fileService.updateFileName(this.selectedFile.name);
+      this.counter++;
+      console.log("File selected:", this.selectedFile.name);
+      this.fileup = true;
+    }
+  }
+
+  onSubmit() {
+    if (this.selectedFile) {
+      console.log("Uploading file:", this.selectedFile);
+      // Here you can send it to backend using FormData
+      const formData = new FormData();
+      formData.append('file', this.selectedFile);
+      this.parserService.upload(formData).subscribe({
+        next: (response) => {
+          console.log('POST success:', response);
+        },
+        error: (error) => {
+          console.error('POST error:', error);
+        }
+      });
+      // You'd send `formData` using HttpClient
+    } else {
+      console.log("No file selected");
+    }
+  }
+
+  saveAndAnalyse(){
+    this.showTable = true;
+    this.getLog();
   }
     
 }

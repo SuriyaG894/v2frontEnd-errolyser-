@@ -1,0 +1,50 @@
+<div class="container">
+    <form [formGroup]="addErrorForm" (ngSubmit)="onSubmit()">
+      <h2>Add New Error</h2>
+  
+      <label for="title">Title:</label>
+      <input id="title" type="text" formControlName="title" required />
+      <div class="text-danger" *ngIf="title?.invalid && (title?.dirty || title?.touched)">
+        <small *ngIf="title?.errors?.['required']">Title is required.</small>
+      </div>
+  
+      <label for="category">Category:</label>
+      <input id="category" type="text" formControlName="category" required />
+      <div class="text-danger" *ngIf="category?.invalid && (category?.dirty || category?.touched)">
+        <small *ngIf="category?.errors?.['required']">Category is required.</small>
+      </div>
+  
+      <label for="howToFix">How To Fix:</label>
+      <input id="howToFix" type="text" formControlName="howToFix" required />
+      <div class="text-danger" *ngIf="howToFix?.invalid && (howToFix?.dirty || howToFix?.touched)">
+        <small *ngIf="howToFix?.errors?.['required']">How To Fix is required.</small>
+      </div>
+  
+      <label for="beforeExample">Before Example:</label>
+      <input id="beforeExample" type="text" formControlName="beforeExample" required />
+      <div class="text-danger" *ngIf="beforeExample?.invalid && (beforeExample?.dirty || beforeExample?.touched)">
+        <small *ngIf="beforeExample?.errors?.['required']">Before Example is required.</small>
+      </div>
+  
+      <label for="afterExample">After Example:</label>
+      <input id="afterExample" type="text" formControlName="afterExample" required />
+      <div class="text-danger" *ngIf="afterExample?.invalid && (afterExample?.dirty || afterExample?.touched)">
+        <small *ngIf="afterExample?.errors?.['required']">After Example is required.</small>
+      </div>
+  
+      <label for="notes">Notes:</label>
+      <input id="notes" type="text" formControlName="notes" required />
+      <div class="text-danger" *ngIf="notes?.invalid && (notes?.dirty || notes?.touched)">
+        <small *ngIf="notes?.errors?.['required']">Notes is required.</small>
+      </div>
+  
+      <label for="stacktrace">Stack Trace:</label>
+      <input id="stacktrace" type="text" formControlName="stacktrace" required />
+      <div class="text-danger" *ngIf="stacktrace?.invalid && (stacktrace?.dirty || stacktrace?.touched)">
+        <small *ngIf="stacktrace?.errors?.['required']">Stack Trace is required.</small>
+      </div>
+  
+      <button id="submitButton" type="submit">Submit</button>
+    </form>
+  </div>
+  

@@ -1,8 +1,55 @@
-
-<div class="container">
+<div class="container activity-wrapper">
+    <div class="row">
+        <div class="col-8">
     <p class="home-header">Recent Activity</p>
     <div class="recent-activity-container">
+  <div></div>
+      <div class="activity-row" *ngIf="lastLoggedConsole.length > 0">
         <mat-icon>code_blocks</mat-icon>
-        <span>Null Pointer Exception</span>
+        <div class="console-circle"></div>
+        <span>{{lastLoggedConsole}}</span>
+      </div>
+  
+      <div class="activity-row" *ngIf="logFileName.length > 0">        
+        <mat-icon>description</mat-icon>
+        <div class="console-circle"></div>
+        <span>{{logFileName}}</span>
+      </div>
+  
+      <div class="activity-row">
+        <mat-icon>menu_book</mat-icon>
+        <div class="repo-circle"></div>
+        <span>New Logical Error</span>
+      </div>  
     </div>
-</div>
+    <div>
+        <p class="home-header">Get Started Quickly</p>
+        <div class="slogan">
+            <span>Facing issues understanding your error? Paste it here.</span>
+        </div>
+        <div class="slogan">
+            <span>Got a bunch of errors in a file? Feed it to me!</span>
+        </div>
+        <div class="slogan">
+            <span>Ready to build your error library? Add it here.</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-3">
+        <div class="box box1" >
+            <p>Console Snippet Shared</p>
+            <span>08</span>
+        </div>
+        <div class="box box2">
+            <p>Log Uploads</p>
+            <span>{{logUpLoads}}</span>
+        </div>
+        <div class="box box3">
+            <p>Recent Error Entries</p>
+            <span>00</span>
+        </div>
+    </div>
+    </div>
+  </div>
+  

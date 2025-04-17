@@ -8,6 +8,7 @@ import { BasicComponent } from './basic/basic.component';
 import { ErrorListComponent } from './error-list/error-list.component';
 import { DetailedBlogComponent } from './detailed-blog/detailed-blog.component';
 import { ErrorDetailsComponent } from './error-details/error-details.component';
+import { AddNewErrorComponent } from './add-new-error/add-new-error.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -18,6 +19,7 @@ export const routes: Routes = [
   {path:'console',component:BasicComponent},
     {path:'errorList',component:ErrorListComponent},
     {path:'detailedblog',component:DetailedBlogComponent},
-    {path:'userList',component:ErrorDetailsComponent}
+    {path:'userList',component:ErrorDetailsComponent},
+    {path:'addNewError',component:AddNewErrorComponent}
 
 ];

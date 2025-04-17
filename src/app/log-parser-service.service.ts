@@ -16,15 +16,15 @@ export class LogParserServiceService {
     return this.http.get<ILogParser[]>(this.baseUrl);
   }
 
-  upload(file: File): Observable<HttpEvent<any>> {
-    const formData: FormData = new FormData();
-    formData.append('file', file);
+  upload(formData: FormData): Observable<HttpEvent<any>> {
+    
 
-    const req = new HttpRequest('POST', `${this.baseUrl}/upload`, formData, {
-      reportProgress: true,
-      responseType: 'json'
-    });
+    const req = new HttpRequest('POST', `${this.baseUrl}upload`, formData,{responseType: 'text' as 'json'});
 
     return this.http.request(req);
+  }
+
+  deletePreviousLog():Observable<any>{
+    return this.http.delete(`${this.baseUrl}deleteLog`,{responseType:'text'as'json'});
   }
 }

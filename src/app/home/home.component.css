@@ -1,8 +1,72 @@
-.home-header{
+.home-header {
     font-size: 48px;
-    color:#2F3542;
+    color: #2F3542;
+  }
+  
+  .recent-activity-container {
+    margin-left: 40px;
+  }
+  
+  .activity-row {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Optional spacing between items */
+    margin-bottom: 8px; /* Optional spacing between rows */
+  }
+  
+  .console-circle{
+    width: 12px;
+    height: 12px;
+    background-color: red;
+    border-radius: 50%;
+  }
+  .repo-circle{
+    width: 12px;
+    height: 12px;
+    background-color: orange;
+    border-radius: 50%;
+  }
+  
+  .slogan{
+    background-color: #E0E7FF;
+    color:#1E293B;
+    padding:10px;
+    width:fit-content;
+    border-radius: 15px;
+    margin-bottom: 10px;
+  }
+
+  .box{
+    width: 170px;
+    height: 140px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 22px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  .box p{
+    margin-top: 20px;
+    font-size:22px;
+    text-align: center;
+    font-weight: 500;
+  }
+  .box span{
+    font-size: 35px;
+    font-weight: bolder;
+  }
+
+.box1{
+    color:#880E4F;
+    background-color: #FCE4EC;
 }
-.recent-activity-container{
-    margin-left:40px;
-    
+.box2{
+    color:#3D1E6D;
+    background-color: rgba(160, 132, 220,0.3);
+}
+.box3{
+    color:#2E2E2E;
+    background-color: rgba(255, 160, 122,0.7);
 }

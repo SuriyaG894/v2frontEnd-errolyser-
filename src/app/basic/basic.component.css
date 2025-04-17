@@ -1,6 +1,10 @@
+body{
+  background-color: #F7F9FC;
+}
 .error-analyzer-container {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
   max-width: 1000px;
+
   margin: 0 auto;
   padding: 20px;
 }
@@ -70,7 +74,9 @@ textarea {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
-
+tr{
+  margin-left: 10px;
+}
 .save-message {
   padding: 10px;
   border-radius: 4px;
