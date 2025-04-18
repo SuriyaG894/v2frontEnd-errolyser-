@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ErrorDTO } from '../models/error-dto.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ErrorAnalyzerServiceService } from '../services/error-analyzer-service.service';
 
 @Component({
   selector: 'app-repo',
@@ -18,16 +19,16 @@ export class RepoComponent {
   errors: ErrorDTO[] = [];
   filteredErrors: ErrorDTO[] = [];
 
-  constructor(private errorService: ErrorServiceService, private router: Router, private http: HttpClient) {}
+  constructor(private errorService: ErrorServiceService, private router: Router, private http: HttpClient,private errorAnalyzer:ErrorAnalyzerServiceService) {}
 
   ngOnInit(): void {
     this.loadErrors();
   }
 
   loadErrors() {
-    this.errorService.getAllErrors().subscribe(data => {
+    this.errorAnalyzer.getAllErrors().subscribe(data => {
       this.errors = data;
-      console.log(this.errors);
+      // console.log(this.errors);
       this.filterErrors(); // filter after loading
     });
   }

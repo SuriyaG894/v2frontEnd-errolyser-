@@ -21,6 +21,7 @@ export class HeaderComponent {
     {"icon":"code_blocks","label":"Console","route":"console"},
     {"icon":"description","label":"Log","route":"log"},
     {"icon":"menu_book","label":"Repo","route":"repo"},
+    {"icon":"history","label":"History","route":"history"}
     
   ]
   toggleSidebar() {

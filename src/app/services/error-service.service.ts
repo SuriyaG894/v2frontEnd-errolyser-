@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ErrorDTO } from '../models/error-dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class ErrorServiceService {
   }
 
   // Tell to santhan
+  
   
   public getAllErrors(): Observable<any> {
     return this.http.get(`${this.baseUrl}/getAllErrors`);

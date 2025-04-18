@@ -8,9 +8,7 @@ import { ErrorDTO } from '../models/error-dto.model';
   providedIn: 'root'
 })
 export class ErrorAnalyzerServiceService {
-  saveNewError(errorData: ErrorDTO):Observable<any> {
-    return this.http.post(`${this.baseUrl}/addErrors`,errorData)
-  }
+  
 
   private baseUrl = 'http://localhost:8080'; // Endpoint for Spring Boot backend
 
@@ -20,6 +18,16 @@ export class ErrorAnalyzerServiceService {
   saveErrorDetails(errorDetails: ErrorDetails): Observable<any> {
     return this.http.post(`${this.baseUrl}/saveErrorDetails`, errorDetails);
   }
+
+  public getAllErrors(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/getAllErrors`);
+  }
+
+
+  saveNewError(errorData: ErrorDTO):Observable<any> {
+    return this.http.post(`${this.baseUrl}/addNewError`,errorData)
+  }
+  
 
   // Get all error details
   public getAllErrorDetails(): Observable<any> {

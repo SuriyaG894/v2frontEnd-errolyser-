@@ -1,7 +1,7 @@
 <div class="container">
     <h2 class="text-center">Repository / Community</h2>
     <div class="c">
-        <a class="btn btn-primary" style="height: 40px;padding: 7px;" routerLink="/addNewError" routerLinkActive="active" >Add New Error</a>
+        <a class="btn "  style="height: 40px;padding: 7px;background-color: #1E293B;color:aliceblue;margin-left: 36px;" routerLink="/addNewError" routerLinkActive="active" >Add New Error</a>
         <input type="text" [(ngModel)]="searchText" (ngModelChange)="filterErrors()" class="form-control my-3" placeholder="Search errors...">
     </div>
 
@@ -20,7 +20,7 @@
       <td>{{ error.title }}</td>
       <td>{{ error.category }}</td>
       <td>
-        <a class="btn btn-primary mx-2" [routerLink]="['/detailedblog']" [queryParams]="{Id: error.id}">
+        <a class="btn  mx-2" style="background-color:#1E293B ;color:aliceblue" [routerLink]="['/detail',error.id]" [queryParams]="{Id: error.id}">
           Know more
         </a>
       </td>

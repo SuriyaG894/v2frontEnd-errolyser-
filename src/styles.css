@@ -11,3 +11,29 @@ table.table.table-striped tbody tr:nth-child(odd) {
     background-color: yellow !important;
   }
   
+/* styles.css */
+#splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#splash-screen img {
+  width: 100px;
+  height: auto;
+}
+
+/* styles.css */
+#splash-screen.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}

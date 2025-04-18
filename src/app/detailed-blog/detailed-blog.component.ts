@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorServiceService } from '../services/error-service.service';
 import { ErrorDTO } from '../models/error-dto.model';
 import { ErrorAnalyzerServiceService } from '../services/error-analyzer-service.service';
-
+// import { HeaderComponent } from '../header/header.component';
 @Component({
   selector: 'app-detailed-blog',
   imports: [],
@@ -27,16 +27,17 @@ export class DetailedBlogComponent {
 
   ngOnInit(): void {
     this.id = this.activatedRouter.snapshot.queryParamMap.get("Id") || '';
-    
+    console.log(this.id)
     this.getErrorById();
   }
   getErrorById() {
     this.errorService.getErrorById(this.id).subscribe(data=>{
        this.errorData = data;
+       console.log(this.errorData)
     })
   }
   goBack(): void {
-    this.router.navigate(['/errorList']);
+    this.router.navigate(['/repo']);
   }
 
  

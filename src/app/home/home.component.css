@@ -41,8 +41,8 @@
   }
 
   .box{
-    width: 170px;
-    height: 140px;
+    width: 180px;
+    height: 150px;
     display: flex; 
     justify-content: center; 
     align-items: center;
@@ -50,6 +50,7 @@
     margin-bottom: 22px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding:5px;
   }
   .box p{
     margin-top: 20px;

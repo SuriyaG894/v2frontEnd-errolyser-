@@ -36,19 +36,19 @@
         </div>
       </div>
     </div>
-    <div class="col-1"></div>
-    <div class="col-3">
+    <div class="col-2"></div>
+    <div class="col-2">
         <div class="box box1" >
             <p>Console Snippet Shared</p>
-            <span>00</span>
+            <span>{{totalConsoleSearches}}</span>
         </div>
         <div class="box box2">
             <p>Log Uploads</p>
-            <span>{{logUpLoads}}</span>
+            <span>{{logUpLoads.length == 0? "0":logUpLoads}}</span>
         </div>
         <div class="box box3">
-            <p>Recent Error Entries</p>
-            <span>01</span>
+            <p>Errors in Repo</p>
+            <span>{{totalRepoList}}</span>
         </div>
     </div>
     </div>

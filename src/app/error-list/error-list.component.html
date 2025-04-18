@@ -16,7 +16,7 @@
                 <td>{{ error.id }}</td>
                 <td>{{ error.title }}</td>
                 <td>{{ error.category }}</td> 
-                <td><a class="btn btn-primary mx-2" [routerLink]="['/detailedblog']" [queryParams]="{Id: error.id}">Know more</a>
+                <td><a class="btn mx-2" style="background-color: #1E293B;" [routerLink]="['/detail']" [queryParams]="{Id: error.id}">Know more</a>
             </tr>
         </tbody>
     </table>

@@ -1,42 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TableStructure</title>
-    <!-- <link rel="stylesheet" href="style.css"> -->
-</head>
-<body>
-
-    <div id="outerlayer">
-        <div id="design">
+<div id="outerlayer">
+    <div id="design">
+        
+        
+        <div class="card">
             <button (click)="goBack()" class="back-btn">
                 <i class="fa fa-arrow-left"></i> Back
-              </button>
+            </button>
             <h1 id="title">{{errorData.title}}</h1>
+            <div class="card-content">
+                <h2>Category:</h2>
+                <p id="category">{{errorData.category}}</p>
+
+                <h2>How to fix:</h2>
+                <p id="fix">{{errorData.howToFix}}</p>
+            </div>
             
-            <h1>Category:</h1>
-            <p id="category">{{errorData.category}}</p>
-            
+            <div class="example">
+                <h2>Example:</h2>
+                <div class="exampledata">
+                    <h3>Before Example:</h3>
+                    <p id="beforeExample">{{errorData.beforeExample}}</p>
 
-        <h1>How to fix:</h1>
-        <p id="fix">{{errorData.howToFix}}</p>
+                    <h3>After Example:</h3>
+                    <p id="afterExample">{{errorData.afterExample}}</p>
+                </div>
+            </div>
 
-        <div class="example">
-            <h1>Example:</h1>
-            <div class="exampledata">
-                <h1>Before Example:</h1>
-                <p id="beforeExample">{{errorData.beforeExample}}</p>
-
-                <h1>After Example:</h1>
-                <p id="afterExample">{{errorData.afterExample}}</p>
+            <div class="card-footer">
+                <h2>Notes:</h2>
+                <p id="notes">{{errorData.notes}}</p>
             </div>
         </div>
-
-        <h1>Notes:</h1>
-        <p id="notes">{{errorData.notes}}</p>
     </div>
-    </div>
-    <!-- <script src="script.js"></script> -->
-</body>
-</html>
+</div>

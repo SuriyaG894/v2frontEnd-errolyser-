@@ -1,0 +1,36 @@
+<div class="container">
+<div class="table-responsive" >
+    
+    <h2 class="text-center">User Errors List</h2>
+    <!-- <input type="text" [(ngModel)] = "searchText"> -->
+    <table class="table table-bordered table mx-auto">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>ID</th>
+                <th>Time Stamp</th>
+                <th>Exception Type</th>
+                <th>Error Message</th>
+                <th>Error Type</th>
+                <th>Line Number</th>
+                <th>File Name</th>
+                <th>Stack Trace</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let error of errorDetailsList" class="text-center">
+                <td>{{ error.id }}</td>
+                <td>{{ error.timestamp}}</td> 
+                <td>{{ error.exceptionType }}</td>
+                <td>{{ error.errorMessage }}</td> 
+                <td>{{ error.errorType }}</td> 
+                <td>{{ error.lineNumber }}</td> 
+                <td>{{ error.fileName }}</td> 
+                <td>{{ error.stackTrace }}</td> 
+                <!-- <td>{{ error.relevantCode }}</td>  -->
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
