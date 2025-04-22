@@ -19,6 +19,7 @@ interface ErrorDetails {
   stackTrace: string[];
   relevantCode: string;
   timestamp?: Date;
+  errortype:string;
 }
 
 @Component({
@@ -75,7 +76,8 @@ export class BasicComponent implements OnInit {
             fileName: this.errorDetails?.fileName || '', 
             stackTrace: this.errorDetails?.stackTrace || [], 
             relevantCode: this.errorDetails?.relevantCode || '',
-            lineNumber: this.errorDetails?.lineNumber ?? null
+            lineNumber: this.errorDetails?.lineNumber ?? null,
+            errortype:this.errorDetails?.errortype || ''
           };
         }
       },
@@ -96,7 +98,8 @@ export class BasicComponent implements OnInit {
       lineNumber: null,
       fileName: '',
       stackTrace: [],
-      relevantCode: ''
+      relevantCode: '',
+      errortype:''
     };
 
     // Generic patterns for different languages
@@ -204,5 +207,37 @@ export class BasicComponent implements OnInit {
 
     return errorDetails;
   }
+
+
+  downloadTableAsExcel(): void {
+    const table = document.getElementById('console-table') as HTMLTableElement;
+    if (!table) {
+      console.error('Table not found!');
+      return;
+    }
+  
+    const csvData: string[] = [];
+  
+    for (let row of table.rows) {
+      const rowArray: string[] = [];
+      for (let cell of row.cells) {
+        let cellText = cell.innerText.trim().replace(/"/g, '""'); // Escape quotes and trim whitespace
+  
+        // Wrap all cells in quotes to prevent Excel misinterpretation (especially for timestamps)
+        rowArray.push(`"${cellText}"`);
+      }
+      csvData.push(rowArray.join(','));
+    }
+  
+    const csvString = csvData.join('\n');
+    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+  
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'console-data.csv';
+    link.click();
+  }
+  
+
 
 }

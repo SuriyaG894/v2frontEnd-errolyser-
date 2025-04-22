@@ -37,3 +37,14 @@ table.table.table-striped tbody tr:nth-child(odd) {
   transition: opacity 0.5s ease;
   pointer-events: none;
 }
+
+.login-container {
+  background-image: url('/assets/bg2.jpg'); /* Note the / at the start */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+}

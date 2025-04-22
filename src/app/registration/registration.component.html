@@ -1,0 +1,60 @@
+<div class="login-container">
+    <div class="container">
+      <div class="row justify-content-center w-100">
+        <div class="col-6">
+          <div class="text-center mb-4">
+            <h3>Register</h3>
+          </div>
+  
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <!-- Username -->
+            <div class="form-group">
+              <label>Username</label>
+              <input
+                type="text"
+                placeholder="Enter the username"
+                class="form-control"
+                formControlName="username"
+              />
+              <small class="text-danger" *ngIf="username?.invalid && (username?.dirty || username?.touched)">
+                Username is required
+              </small>
+            </div>
+  
+            <!-- Password -->
+            <div class="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                placeholder="Enter the password"
+                class="form-control"
+                formControlName="password"
+              />
+              <small class="text-danger" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                <span *ngIf="password?.hasError('required')">Password is required</span>
+                <span *ngIf="password?.hasError('minlength')">Minimum 6 characters required</span>
+              </small>
+            </div>
+  
+            <!-- Role -->
+            <div class="form-group">
+              <label>Select</label>
+              <select class="form-select" formControlName="role">
+                <option value="USER">USER</option>
+                <option value="ADMIN">ADMIN</option>
+              </select>
+              <small class="text-danger" *ngIf="role?.invalid && (role?.dirty || role?.touched)">
+                Role selection is required
+              </small>
+            </div>
+  
+            <div class="text-center mt-3">
+              <button type="submit" class="btn btn-dark" [disabled]="registerForm.invalid">Register</button>
+              <p>Already have an account? <a routerLink="/login">Login</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

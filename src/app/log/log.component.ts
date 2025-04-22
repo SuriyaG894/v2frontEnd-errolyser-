@@ -10,6 +10,7 @@ import { IStackTrace } from '../istack-trace';
 import { FileSharingService } from '../file-sharing.service';
 import { CookieService } from 'ngx-cookie-service';
 import { LogCountServiceService } from '../log-count-service.service';
+import { IStackToObject } from '../istack-to-object';
 
 
 @Component({
@@ -101,5 +102,49 @@ export class LogComponent implements OnInit{
     this.showTable = true;
     this.getLog();
   }
+
+
+  downloadTableAsExcel(): void {
+    const header = ['Id', 'Timestamp', 'Level', 'Thread', 'Exception Name', 'Error Message', 'Stack Trace'];
+  
+    const csvRows = this.logData.map(log => {
+      // Format the timestamp if needed
+      const timestamp = `"${log.timestamp}"`;  // Wrap timestamp in quotes
+  
+      // Flatten the stack trace array and escape characters
+      const stackTrace = log.stackTrace
+        .map(trace => {
+          // Ensure the trace is well-formed JSON and escape quotes
+          let traceString = JSON.stringify(trace);
+  
+          // Escape additional commas or quotes inside the trace string
+          traceString = traceString.replace(/"/g, '""'); // Double quotes inside CSV
+          return traceString;
+        })
+        .join(' | ');  // Join them into a single string, using a delimiter (e.g., ' | ') for readability
+  
+      // Return the CSV row with each value properly wrapped in quotes if needed
+      return [
+        log.id,
+        `"${timestamp}"`,
+        log.level,
+        log.thread,
+        log.exceptionName,
+        log.errorMessage,
+        `"${stackTrace}"`  // Wrap stack trace in quotes for CSV safety
+      ].join(',');
+    });
+  
+    // Join header and rows
+    const csvContent = [header.join(','), ...csvRows].join('\n');
+  
+    // Trigger CSV download
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'log_data.csv';
+    link.click();
+  }
+  
     
 }

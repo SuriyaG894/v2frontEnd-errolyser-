@@ -1,0 +1,27 @@
+/* .login-container {
+    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } */
+  
+  .container {
+    width: 800px;
+  }
+  
+  .col-6 {
+    padding: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    color:white;
+  }
+  
+  a{
+    text-decoration: none;
+    color:skyblue;
+  }

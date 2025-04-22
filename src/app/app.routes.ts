@@ -10,20 +10,35 @@ import { DetailedBlogComponent } from './detailed-blog/detailed-blog.component';
 import { ErrorDetailsComponent } from './error-details/error-details.component';
 import { AddNewErrorComponent } from './add-new-error/add-new-error.component';
 import { HistoryComponent } from './history/history.component';
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { MainlayoutComponent } from './mainlayout/mainlayout.component';
+import { AuthGuard } from '../auth.guard';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  
-//   { path: 'console', component: ConsoleComponent },
-  { path: 'log', component: LogComponent },
-  { path: 'repo', component: RepoComponent },
-  {path:'console',component:BasicComponent},
-    {path:'errorList',component:ErrorListComponent},
-    {path:'detail',component:DetailedBlogComponent},
-    {path:'detail/:id',component:DetailedBlogComponent},
-    {path:'userList',component:ErrorDetailsComponent},
-    {path:'addNewError',component:AddNewErrorComponent},
-    {path:'history',component:HistoryComponent}
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+
+  // Public routes
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegistrationComponent },
+
+  // Protected routes wrapped in MainLayoutComponent
+  {
+    path: '',
+    component: MainlayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'home', component: HomeComponent },
+      { path: 'log', component: LogComponent },
+      { path: 'repo', component: RepoComponent },
+      { path: 'console', component: BasicComponent },
+      { path: 'errorList', component: ErrorListComponent },
+      { path: 'detail', component: DetailedBlogComponent },
+      { path: 'detail/:id', component: DetailedBlogComponent },
+      { path: 'userList', component: ErrorDetailsComponent },
+      { path: 'addNewError', component: AddNewErrorComponent },
+      { path: 'history', component: HistoryComponent },
+    ],
+  },
 
 ];

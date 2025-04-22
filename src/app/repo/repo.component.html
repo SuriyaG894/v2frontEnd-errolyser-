@@ -1,31 +1,55 @@
-<div class="container">
-    <h2 class="text-center">Repository / Community</h2>
-    <div class="c">
-        <a class="btn "  style="height: 40px;padding: 7px;background-color: #1E293B;color:aliceblue;margin-left: 36px;" routerLink="/addNewError" routerLinkActive="active" >Add New Error</a>
-        <input type="text" [(ngModel)]="searchText" (ngModelChange)="filterErrors()" class="form-control my-3" placeholder="Search errors...">
-    </div>
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Repository / Community</h2>
 
-<table class="table table-bordered table mx-auto">
-  <thead class="table-dark text-center">
-    <tr>
-      <th>ID</th>
-      <th>Title</th>
-      <th>Category</th>
-      <th>Know more</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let error of filteredErrors" class="text-center">
-      <td>{{ error.id }}</td>
-      <td>{{ error.title }}</td>
-      <td>{{ error.category }}</td>
-      <td>
-        <a class="btn  mx-2" style="background-color:#1E293B ;color:aliceblue" [routerLink]="['/detail',error.id]" [queryParams]="{Id: error.id}">
-          Know more
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <!-- Flex row with buttons on both ends -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <!-- Left Button -->
+    <a
+      class="btn"
+      style="height: 40px; padding: 7px 15px; background-color: #1E293B; color: aliceblue;margin-left: 70px;"
+      routerLink="/addNewError"
+      routerLinkActive="active"
+    >
+      Add New Error
+    </a>
 
+    <!-- Right Search -->
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      (ngModelChange)="filterErrors()"
+      class="form-control"
+      placeholder="Search errors..."
+      style="max-width: 300px; border-color: #1E293B;"
+    />
+  </div>
+
+  <!-- Table Section -->
+  <table class="table table-bordered table-hover mx-auto" style="max-width: 900px;">
+    <thead class="table-dark text-center">
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Know more</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let error of filteredErrors" class="text-center">
+        <td>{{ error.id }}</td>
+        <td>{{ error.title }}</td>
+        <td>{{ error.category }}</td>
+        <td>
+          <a
+            class="btn mx-2"
+            style="background-color: #1E293B; color: aliceblue;"
+            [routerLink]="['/detail', error.id]"
+            [queryParams]="{ Id: error.id }"
+          >
+            Know more
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

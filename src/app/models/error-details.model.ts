@@ -8,4 +8,5 @@ export interface ErrorDetails {
     stackTrace: string[];
     relevantCode: string;
     timestamp?: Date;
+    errortype:string;
   }
