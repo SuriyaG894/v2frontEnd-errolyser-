@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +13,9 @@ import { RouterModule } from '@angular/router';
 export class LoginComponent {
 
   loginForm!: FormGroup;
+  token:string='';
 
-  constructor(private fb: FormBuilder,private authenticationService:AuthenticationService) {}
+  constructor(private fb: FormBuilder,private authenticationService:AuthenticationService,private router:Router) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -26,7 +27,12 @@ export class LoginComponent {
   onSubmit(): void {
     if (this.loginForm.valid) {
       console.log('Form Submitted!', this.loginForm.value);
-      this.authenticationService.loginUser(this.loginForm.value);
+      this.authenticationService.loginUser(this.loginForm.value).subscribe(data=>{
+        this.token = data;
+        localStorage.setItem('token',this.token)
+        this.router.navigate(['/home']);
+      }
+      );
     } else {
       this.loginForm.markAllAsTouched(); // shows validation errors if user tries to submit without filling
     }

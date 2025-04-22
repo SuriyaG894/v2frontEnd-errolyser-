@@ -38,6 +38,9 @@
   </div>
 
   <div *ngIf="showTable && fileup" class="table-responsive mt-4">
+    <div style="margin-left: 83.2%;margin-bottom: 5px;">
+      <button (click)="downloadTableAsExcel()" class="btn" style="background-color: #1e1e1e;color: #fafafa;">Download As Excel</button>
+    </div>
     <table class="table table-bordered mx-auto" style="width: 100%;" id="log-table">
       <thead class="table-dark text-center">
         <tr>
@@ -66,8 +69,6 @@
         </tr>
       </tbody>
     </table>
-    <div>
-      <button (click)="downloadTableAsExcel()" class="btn" style="background-color: #1e1e1e;color: #fafafa;">Download As Excel</button>
-    </div>
+    
   </div>
 </div>

@@ -22,10 +22,12 @@ export class HomeComponent implements OnInit{
   lastLoggedConsole:string;
   logFileName:string;
   logUpLoads:string = "0";
+  username:string;
   constructor(private errorService:ErrorServiceService,private errorAnalyzerService:ErrorAnalyzerServiceService,private fileService: FileSharingService,private logCountService:LogCountServiceService){
     this.lastLoggedConsole = "";
     this.logFileName = "";
     this.logUpLoads = "0";
+    this.username="";
   }
 
   ngOnInit(): void {
@@ -40,6 +42,7 @@ export class HomeComponent implements OnInit{
 
       this.countErrorSearches();
       this.countNoOfRepo();
+      this.username = localStorage.getItem('token') || "User";
       
   }
 

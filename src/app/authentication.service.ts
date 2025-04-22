@@ -16,7 +16,7 @@ export class AuthenticationService {
   }
 
   loginUser(data:any):Observable<any>{
-    return this.http.post(`${this.baseUrl}/login}`,data);
+    return this.http.post(`${this.baseUrl}/login`,data,{responseType:'text' as 'json'});
   }
 
 

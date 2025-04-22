@@ -39,18 +39,18 @@
             <!-- Role -->
             <div class="form-group">
               <label>Select</label>
-              <select class="form-select" formControlName="role">
-                <option value="USER">USER</option>
-                <option value="ADMIN">ADMIN</option>
+              <select class="form-select" formControlName="authority">
+                <option value="ROLE_USER">USER</option>
+                <option value="ROLE_ADMIN">ADMIN</option>
               </select>
-              <small class="text-danger" *ngIf="role?.invalid && (role?.dirty || role?.touched)">
+              <small class="text-danger" *ngIf="authority?.invalid && (authority?.dirty || authority?.touched)">
                 Role selection is required
               </small>
             </div>
   
             <div class="text-center mt-3">
               <button type="submit" class="btn btn-dark" [disabled]="registerForm.invalid">Register</button>
-              <p>Already have an account? <a routerLink="/login">Login</a></p>
+              <p>Already have an account? <a routerLink="/login" >Login</a></p>
             </div>
           </form>
         </div>

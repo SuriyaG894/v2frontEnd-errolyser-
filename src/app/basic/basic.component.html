@@ -28,6 +28,9 @@
     {{ saveMessage }}
   </div>
   <div *ngIf="showResult && errorDetails" class="table-responsive mt-4">
+    <div style="margin-left: 68.5%;margin-bottom: 5px;">
+      <button (click)="downloadTableAsExcel()" class="btn" style="background-color: #1e1e1e;color: #fafafa;">Download As Excel</button>
+    </div>
     <table id="console-table" class="table table-bordered mx-auto" style="width: 70%;">
       <thead class="table-dark text-center">
         <tr>
@@ -86,8 +89,6 @@
         </tr>
       </tbody>
     </table>
-    <div style="margin-left: 15%;">
-      <button (click)="downloadTableAsExcel()" class="btn" style="background-color: #1e1e1e;color: #fafafa;">Download As Excel</button>
-    </div>
+    
   </div>
   </div>
