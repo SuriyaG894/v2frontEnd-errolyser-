@@ -9,6 +9,8 @@ import { RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { LogCountServiceService } from '../log-count-service.service';
 import { ErrorDTO } from '../models/error-dto.model';
+import { LogParserServiceService } from '../log-parser-service.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-home',
@@ -23,18 +25,17 @@ export class HomeComponent implements OnInit{
   logFileName:string;
   logUpLoads:string = "0";
   username:string;
-  constructor(private errorService:ErrorServiceService,private errorAnalyzerService:ErrorAnalyzerServiceService,private fileService: FileSharingService,private logCountService:LogCountServiceService){
+  recentRepo:string;
+  constructor(private errorService:ErrorServiceService,private errorAnalyzerService:ErrorAnalyzerServiceService,private fileService: FileSharingService,private logCountService:LogCountServiceService,private parserService:LogParserServiceService){
     this.lastLoggedConsole = "";
     this.logFileName = "";
     this.logUpLoads = "0";
     this.username="";
+    this.recentRepo ="";
   }
 
   ngOnInit(): void {
       this.lastLoggedConsole = "IndexOutOfBound Exception"
-      this.fileService.fileName$.subscribe(name => {
-        this.logFileName = name;
-      });
       this.logCountService.logCount$.subscribe(count=>{
         this.logUpLoads = count;
       })
@@ -42,8 +43,9 @@ export class HomeComponent implements OnInit{
 
       this.countErrorSearches();
       this.countNoOfRepo();
-      this.username = localStorage.getItem('token') || "User";
-      
+      this.username = localStorage.getItem('token') || ''
+      this.loadLogFileName()
+      this.loadLogFileCount()
   }
 
   // santhan
@@ -51,19 +53,48 @@ export class HomeComponent implements OnInit{
   list1:ErrorDTO[]=[]
   totalConsoleSearches:number=0
   totalRepoList:number=0
+  j:number = 0
+  lastThreeSearches:string=""
   countErrorSearches(){
-    this.errorAnalyzerService.getAllErrorDetails().subscribe(data=>{
+     this.username = localStorage.getItem('token') || ''
+    this.errorAnalyzerService.getAllErrorDetails(this.username).subscribe(data=>{
       this.list = data;
       console.log(this.list)
       this.totalConsoleSearches = this.list.length;
+      this.lastThreeSearches = this.list.slice(-1)[0].exceptionType.substring(10);
     })
   }
+  
 
   countNoOfRepo(){
     this.errorAnalyzerService.getAllErrors().subscribe(data=>{
      this.list1 = data
      
     this.totalRepoList = this.list1.length
+    })
+  }
+
+  loadLogFileName(){
+    this.parserService.getLogFileName(this.username).subscribe({
+      next:(response)=>{console.log(response)
+        this.logFileName  = response
+        console.log(this.logFileName+ "Suriya")
+        console.log(response);
+      },
+      error:(error)=>{
+        console.log(error)
+      }
+    });
+  }
+
+  loadLogFileCount(){
+    this.parserService.getLogFileCount(this.username).subscribe({
+      next:(response)=>{console.log(response)
+        this.logCountService.updateLogCount(response) 
+      },
+      error:(error)=>{
+        console.log(error)
+      }
     })
   }
 

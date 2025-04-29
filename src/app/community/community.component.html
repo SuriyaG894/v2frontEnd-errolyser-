@@ -1,0 +1,80 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<div class="container">
+  <h1 class="community-title">Community Discussion</h1>
+  <p>Every error tells a story — share yours, fix ours.</p>
+  <div class="form-group">
+  <input type="text" placeholder="Type to Search" class="form-control" [(ngModel)]="searchText" style="width:300px;border-radius: 20px;font-size: 14px;border:3px solid #1E293B;"/>
+  </div>
+  <hr/>
+  <!-- Post a New Question -->
+  <div class="post-question-container">
+    <div class="post-question-card">
+      <h3 class="section-title">Ask a Question</h3>
+      <textarea [(ngModel)]="questionText" placeholder="What would you like to ask the community?" rows="3" class="question-input"></textarea>
+      <button (click)="submitQuestion()" class="primary-button">Post Question</button>
+    </div>
+  </div>
+  
+  <!-- List Questions -->
+  <div class="questions-list">
+    <div *ngFor="let question of filterQuestions()" class="question-card">
+      <div class="question-header">
+        <h3 class="question-title">{{ question.text }}</h3>
+        <span class="question-timestamp">{{ question.timestamp }}</span>
+
+        <div class="question-meta">
+          <span class="username">{{ question.username }}</span>
+          <span class="likes"><i class="fa fa-thumbs-up" style="font-size:20px" (click)="increaseQuestionLike(question.id,question.likes,question.username)"></i> {{ question.likes }}</span>
+        </div>
+              
+        <!-- Comment Button -->
+        <button (click)="question.id !== undefined && toggleCommentBox(question.id)" class="action-button">
+          <i class="fa fa-comment"></i> {{ question.id !== undefined && showCommentBox[question.id] ? 'Cancel' : 'Comment' }}
+        </button>
+      </div>
+          
+      <!-- Comment Textarea -->
+      <div *ngIf="question.id !== undefined && showCommentBox[question.id]" class="comment-form">
+        <textarea [(ngModel)]="commentTexts[question.id]" placeholder="Add your thoughts..." rows="2" class="comment-input"></textarea>
+        <button (click)="submitComment(question)" class="submit-button">Submit</button>
+      </div>
+          
+      <!-- List Comments -->
+      <div class="comments-section">
+        <div *ngFor="let comment of question.answers" class="comment-card">
+          <div class="comment-content">
+            <p class="comment-text">{{ comment.text }}</p>
+            <span class="comment-timestamp">{{ comment.timestamp }}</span>
+            <div class="comment-meta">
+              <span class="comment-author">{{ comment.username }}</span>
+              <span class="likes"><i class="fa fa-thumbs-up" style="font-size:19px" (click)="increaseAnswerLike(comment.id,comment.likes,comment.username)"></i> {{ comment.likes }}</span>
+            </div>
+            
+            <!-- Reply Button -->
+            <button (click)="comment.id !== undefined && toggleReplyBox(comment.id)" class="reply-button">
+              <i class="fa fa-reply"></i> {{ comment.id !== undefined && showReplyBox[comment.id] ? 'Cancel' : 'Reply' }}
+            </button>
+          </div>
+                  
+          <!-- Reply Textarea -->
+          <div *ngIf="comment.id !== undefined && showReplyBox[comment.id]" class="reply-form">
+            <textarea [(ngModel)]="replyTexts[comment.id]" placeholder="Write a reply..." rows="2" class="reply-input"></textarea>
+            <button *ngIf="question.id !== undefined" (click)="submitReply(question.id, comment)" class="submit-button">Post Reply</button>
+          </div>
+                  
+          <!-- List Replies -->
+          <div *ngIf="comment.replies && comment.replies.length > 0" class="replies-section">
+            <div *ngFor="let reply of comment.replies" class="reply-card">
+              <p class="reply-text">{{ reply.text }}</p>
+              <span class="reply-timestamp">{{ reply.timestamp }}</span>
+              <div class="reply-meta">
+                <span class="reply-author">{{ reply.username }}</span>
+                <span class="likes"><i class="fa fa-thumbs-up" style="font-size:18px" (click)="increaseReplyLike(reply.id,reply.likes,reply.username)"></i> {{ reply.likes }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

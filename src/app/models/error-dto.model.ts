@@ -7,4 +7,5 @@ export interface ErrorDTO {
     afterExample:String
     notes:string
     stacktrace?:string
+    username:string
 }

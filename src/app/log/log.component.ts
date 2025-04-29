@@ -3,14 +3,13 @@ import { ILogParser } from '../ilog-parser';
 import { LogParserServiceService } from '../log-parser-service.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomDialogComponent } from '../custom-dialog/custom-dialog.component';
 import { IStackTrace } from '../istack-trace';
 import { FileSharingService } from '../file-sharing.service';
 import { CookieService } from 'ngx-cookie-service';
 import { LogCountServiceService } from '../log-count-service.service';
-import { IStackToObject } from '../istack-to-object';
+import { ILogHistory } from '../ilog-history';
 
 
 @Component({
@@ -24,16 +23,31 @@ export class LogComponent implements OnInit{
     showTable:boolean= false;
     fileup:boolean=false;
     counter:number = 0;
-
+    logHistory:ILogHistory;
     logData:ILogParser[]=[];
+    logObject = [];
+    
+  currentPage = 1;
+  itemsPerPage = 10;
+  paginatedLogData:ILogParser[] = [];
 
     constructor(private parserService:LogParserServiceService,private fileService:FileSharingService,private cookieService:CookieService,private logCountService:LogCountServiceService){
-      
+      this.logHistory = {
+        fileName:'',
+        date:'',
+        username:''
+      }
+      this.updatePaginatedLogData();
     }
 
     getLog(){
       this.parserService.getLogs().subscribe(logs=>{
         this.logData =logs;
+      });
+      this.updatePaginatedLogData();
+      this.parserService.saveLogInHistoryCombined(this.logData).subscribe({
+        next:(response)=>{console.log(response)},
+        error:(error)=>{console.log(error)}
       });
     }
 
@@ -42,6 +56,7 @@ export class LogComponent implements OnInit{
         this.logData.forEach(data=>{
           console.log(data.timestamp);
         });
+        this.updatePaginatedLogData();
     }
 
     readonly dialog = inject(MatDialog);
@@ -59,15 +74,8 @@ export class LogComponent implements OnInit{
 
   onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
-    this.parserService.deletePreviousLog().subscribe({
-      next: (response) => {
-        console.log('POST success:', response);
-      },
-      error: (error) => {
-        console.error('POST error:', error);
-      }
-    });
     if (input.files && input.files.length > 0) {
+      console.log("Delete request made");
       this.selectedFile = input.files[0];
       this.fileService.updateFileName(this.selectedFile.name);
       this.counter++;
@@ -81,9 +89,35 @@ export class LogComponent implements OnInit{
   onSubmit() {
     if (this.selectedFile) {
       console.log("Uploading file:", this.selectedFile);
+      this.parserService.deletePreviousLog().subscribe({
+        next: (response) => {
+          console.log('POST success:', response);
+        },
+        error: (error) => {
+          console.error('POST error:', error);
+        }
+      });
       // Here you can send it to backend using FormData
+      const now = new Date();
+
+  const formattedDate = now.getFullYear() + '-' +
+  String(now.getMonth() + 1).padStart(2, '0') + '-' +
+  String(now.getDate()).padStart(2, '0') + ' ' +
+  String(now.getHours()).padStart(2, '0') + ':' +
+  String(now.getMinutes()).padStart(2, '0') + ':' +
+  String(now.getSeconds()).padStart(2, '0');
+      this.logHistory = {fileName:this.selectedFile.name,
+        date:formattedDate,
+        username: localStorage.getItem('token') ?? 'user'
+      };
+      this.parserService.saveLogHistory(this.logHistory).subscribe({next:(data)=>{
+        console.log("History Saved"+ data);
+      },error:(error)=>{
+        console.log(error);
+      }})
       const formData = new FormData();
       formData.append('file', this.selectedFile);
+      formData.append('username',localStorage.getItem('token') ?? 'user');
       this.parserService.upload(formData).subscribe({
         next: (response) => {
           console.log('POST success:', response);
@@ -146,5 +180,31 @@ export class LogComponent implements OnInit{
     link.click();
   }
   
-    
+  
+  
+  
+  updatePaginatedLogData() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedLogData = this.logData.slice(startIndex, endIndex);
+  }
+  
+  goToPreviousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaginatedLogData();
+    }
+  }
+  
+  goToNextPage() {
+    if (this.currentPage < this.totalPages()) {
+      this.currentPage++;
+      this.updatePaginatedLogData();
+    }
+  }
+  
+  totalPages(): number {
+    return Math.ceil(this.logData.length / this.itemsPerPage);
+  }
+  
 }

@@ -6,8 +6,37 @@
   <p style="display: inline-block;" class="slogan">Every error has a past — we keep track of it.</p>
   <p style="margin-top: -15px" class="slogan">Revisit, reflect, and analyze all your past logs in one clean timeline.</p>
 </div>
+<div>
   <div>
     <input style="float: left;" type="text" [(ngModel)]="searchText" placeholder="Search errors...">
+    
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; float: right; gap: 2px">
+      <div class="form-group checkbox-container">
+        <input 
+          type="radio" 
+          id="console" 
+          name="displayError" 
+          [(ngModel)]="selectedErrorDisplay" 
+          [value]="'console'" 
+          class="form-check-input" 
+        />
+        <label for="console" class="form-check-label">Console</label>
+      </div>
+  
+      <div class="form-group checkbox-container">
+        <input 
+          type="radio" 
+          id="log" 
+          name="displayError" 
+          [(ngModel)]="selectedErrorDisplay" 
+          [value]="'log'" 
+          class="form-check-input" 
+        />
+        <label for="log" class="form-check-label">Log</label>
+      </div>
+    </div>
+  </div>
+  
     <!-- <div style="float: right;">
     <label for="console">Console</label>
     <input name="page" type="radio"/>
@@ -17,32 +46,47 @@
     <input name="page" type="radio"/>
     </div> -->   
   </div>
-    <table class="table-bordered table-responsive">
+    <table class="table-bordered table-responsive" *ngIf="selectedErrorDisplay=='console'">
       <thead class="table-header">
         <tr>
           <th>ID</th>
-          <th>Time Stamp</th>
           <th>Exception Type</th>
-          <!-- <th>Error Message</th> -->
-          <th>Error Type</th>
-          <th>Line Number</th>
-          <th>File Name</th>
-          <th>Error Searched Through</th>
+          <th>Count</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let error of filterErrors()">
-          <td>{{ error.id }}</td>
-          <td>{{ error.timestamp }}</td>
-          <td>{{ error.exceptionType }}</td>
-          <!-- <td>{{ error.errorMessage }}</td> -->
-          <td>{{ error.errorType }}</td>
-          <td>{{ error.lineNumber }}</td>
-          <td>{{ error.fileName }}</td>
-          <td>{{ error.errortype }}</td>
+        <tr *ngFor="let error of filterErrors();let i = index">
+          <td>{{ i+1 }}</td>
+          <td>{{ error.exceptionName }}</td>
+          <td>{{ error.count }}</td>
           <td>
-            <button class="view-stack-btn" (click)="openStackTraceModal(error)">
+            <button class="view-stack-btn" (click)="openDetailedConsoleHistory(error.exceptionName)">
+              View
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- LogHistory -->
+
+    <table class="table-bordered table-responsive" *ngIf="selectedErrorDisplay=='log'">
+      <thead class="table-header">
+        <tr>
+          <th>ID</th>
+          <th>Exception Type</th>
+          <th>Count</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let error of filerLogCountErrors();let i = index">
+          <td>{{ i+1 }}</td>
+          <td>{{ error.exceptionName }}</td>
+          <td>{{ error.count }}</td>
+          <td>
+            <button class="view-stack-btn" (click)="openDetailedLogHistory(error.exceptionName)">
               View
             </button>
           </td>
@@ -50,7 +94,60 @@
       </tbody>
     </table>
   </div>
+
   
+  
+  
+
+  <div class="modal" id="ConsoleHistoryExceptionDetail" [class.show]="isModalConsoleDHOpen">
+    <div class="modal-overlay" (click)="closeDHModal()"></div>
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Exception Detail</h3>
+        <button class="close-btn" (click)="closeDHModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered mx-auto" style="width: 100%;" id="log-table">
+          <thead class="table-dark text-center">
+            <tr>
+              <th>Id</th>
+              <th>Timestamp</th>
+              <th>Exception Type</th>
+              <th>Error Message</th>
+              <th>Stack Trace</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--exceptionType: string;
+    errorMessage: string;
+    errorType: string;
+    lineNumber: number | null;
+    fileName: string;
+    stackTrace: string[];
+    relevantCode: string;
+    timestamp?: Date;
+    errortype:string;
+    username:string;-->
+            <tr *ngFor="let data of consoleDetailedError; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ data.timestamp }}</td>
+              <td>{{ data.exceptionType }}</td>
+              <td>{{ data.errorMessage }}</td>
+              <td class="text-center">
+                <button type="button"  (click)="openStackTraceModal(data.stackTrace)" class="btn view-stack-btn">
+                  View
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" (click)="closeDHModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Custom Modal -->
   <div class="modal" id="stackTraceModal" [class.show]="isModalOpen">
     <div class="modal-overlay" (click)="closeModal()"></div>
@@ -64,6 +161,88 @@
       </div>
       <div class="modal-footer">
         <button class="btn-secondary" (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="LogHistoryExceptionDetail" [class.show]="isModalLogDHOpen">
+    <div class="modal-overlay" (click)="closeDHModal()"></div>
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Exception Detail</h3>
+        <button class="close-btn" (click)="closeDHModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered mx-auto" style="width: 100%;" id="log-table">
+          <thead class="table-dark text-center">
+            <tr>
+              <th>Id</th>
+              <th>Timestamp</th>
+              <th>Level</th>
+              <th>Thread</th>
+              <th>Exception Name</th>
+              <th>Error Message</th>
+              <th>Stack Trace</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of logExceptionHistoryDetailed; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ data.timestamp }}</td>
+              <td>{{ data.level }}</td>
+              <td>{{ data.thread }}</td>
+              <td>{{ data.exceptionName }}</td>
+              <td>{{ data.errorMessage }}</td>
+              <td class="text-center">
+                <button type="button"  (click)="openStackTraceView(data.stackTrace)" class="btn view-stack-btn">
+                  View
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" (click)="closeDHModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal" id="LogstackTraceModal" [class.show]="isModalStackTraceOpen">
+    <div class="modal-overlay" (click)="closeStacktraceModal()"></div>
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Stack Trace Details</h3>
+        <button class="close-btn" (click)="closeStacktraceModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-responsive">
+          <thead>
+            <tr>
+              <th>Class Name</th>
+              <th>Method Name</th>
+              <th>File Name</th>
+              <th>Line Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of modalStackTrace">
+              <ng-container *ngIf="item.className && item.className.length > 0 && item.methodName.length > 0 && item.fileName.length > 0;else noStack">
+                <td>{{ item.className }}</td>
+              <td>{{ item.methodName }}</td>
+              <td>{{ item.fileName }}</td>
+              <td>{{ item.lineNumber }}</td>
+              </ng-container>
+              <ng-template #noStack>
+                  <td>No stack trace info available</td>
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" (click)="closeStacktraceModal()">Close</button>
       </div>
     </div>
   </div>

@@ -7,5 +7,6 @@ export interface ILogParser {
     thread:string,
     exceptionName:string,
     errorMessage:string,
+    username:string,
     stackTrace:Array<IStackTrace>
 }

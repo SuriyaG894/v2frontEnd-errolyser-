@@ -1,14 +1,13 @@
 <div class="container activity-wrapper">
-  <span>Welcome,{{username}}</span>
+  <!-- <p>Hi {{username}}</p> -->
     <div class="row">
         <div class="col-8">
     <p class="home-header">Recent Activity</p>
     <div class="recent-activity-container">
-  <div></div>
       <div class="activity-row" *ngIf="lastLoggedConsole.length > 0">
         <mat-icon>code_blocks</mat-icon>
         <div class="console-circle"></div>
-        <span>{{lastLoggedConsole}}</span>
+        <span>{{lastThreeSearches}}</span>
       </div>
   
       <div class="activity-row" *ngIf="logFileName.length > 0">        
@@ -17,10 +16,10 @@
         <span>{{logFileName}}</span>
       </div>
   
-      <div class="activity-row">
+      <div class="activity-row" *ngIf="recentRepo.length > 0">
         <mat-icon>menu_book</mat-icon>
         <div class="repo-circle"></div>
-        <span>New Logical Error</span>
+        <span>{{recentRepo}}</span>
       </div>  
     </div>
     <div>

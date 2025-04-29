@@ -1,25 +1,16 @@
-table{
-    width: 1000px;
-    
-}
-.container{
-    margin-top: 3rem;
-    text-align: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 
-.c{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: 60px;
-}
+
+
+.slogan {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+  }
+
+
 input{
     float: right;
-    margin-right: 95px;
-    margin-bottom: 10px;
     width: 300px;
     border: 3px solid lightblue;
     border-radius: 15px;
-    text-indent:15px;
 }

@@ -1,0 +1,111 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0f8ff" />
+      <stop offset="100%" stop-color="#e6f0fa" />
+    </linearGradient>
+    
+    <!-- Bug pattern to be repeated -->
+    <pattern id="bugPattern" width="500" height="500" patternUnits="userSpaceOnUse">
+      <!-- Code symbols -->
+      <text x="50" y="100" font-family="monospace" font-size="14" fill="#d0d0d0">function findBug() { debug(); }</text>
+      <text x="150" y="300" font-family="monospace" font-size="14" fill="#d0d0d0">if (error) { fixBug(); }</text>
+      <text x="250" y="200" font-family="monospace" font-size="14" fill="#d0d0d0">try { code(); } catch(bug) {}</text>
+      <text x="75" y="400" font-family="monospace" font-size="14" fill="#d0d0d0">// TODO: Fix this bug</text>
+      
+      <!-- Binary code background -->
+      <text x="300" y="150" font-family="monospace" font-size="10" fill="#e0e0e0">01001000 01100101 01101100 01110000</text>
+      <text x="100" y="220" font-family="monospace" font-size="10" fill="#e0e0e0">01000010 01110101 01100111 01110011</text>
+      <text x="200" y="350" font-family="monospace" font-size="10" fill="#e0e0e0">01000100 01100101 01100010 01110101 01100111</text>
+    </pattern>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="100%" height="100%" fill="url(#bgGradient)" />
+  
+  <!-- Pattern overlay -->
+  <rect width="100%" height="100%" fill="url(#bugPattern)" opacity="0.07" />
+  
+  <!-- Main decorative elements -->
+  
+  <!-- Bug silhouette 1 -->
+  <g transform="translate(200, 300) scale(0.8)" fill="#3498db" opacity="0.7">
+    <!-- Bug body -->
+    <ellipse cx="0" cy="0" rx="60" ry="80" />
+    <!-- Bug head -->
+    <circle cx="0" cy="-100" r="40" />
+    <!-- Bug antennas -->
+    <path d="M-20,-120 Q-50,-170 -80,-160" stroke="#3498db" stroke-width="6" fill="none" />
+    <path d="M20,-120 Q50,-170 80,-160" stroke="#3498db" stroke-width="6" fill="none" />
+    <!-- Bug legs -->
+    <path d="M-50,-20 Q-100,-10 -120,30" stroke="#3498db" stroke-width="6" fill="none" />
+    <path d="M50,-20 Q100,-10 120,30" stroke="#3498db" stroke-width="6" fill="none" />
+    <path d="M-55,20 Q-110,30 -130,70" stroke="#3498db" stroke-width="6" fill="none" />
+    <path d="M55,20 Q110,30 130,70" stroke="#3498db" stroke-width="6" fill="none" />
+    <path d="M-45,60 Q-90,90 -100,130" stroke="#3498db" stroke-width="6" fill="none" />
+    <path d="M45,60 Q90,90 100,130" stroke="#3498db" stroke-width="6" fill="none" />
+  </g>
+  
+  <!-- Bug silhouette 2 -->
+  <g transform="translate(1600, 800) scale(0.6)" fill="#e74c3c" opacity="0.6">
+    <!-- Bug body -->
+    <ellipse cx="0" cy="0" rx="60" ry="80" />
+    <!-- Bug head -->
+    <circle cx="0" cy="-100" r="40" />
+    <!-- Bug antennas -->
+    <path d="M-20,-120 Q-50,-170 -80,-160" stroke="#e74c3c" stroke-width="6" fill="none" />
+    <path d="M20,-120 Q50,-170 80,-160" stroke="#e74c3c" stroke-width="6" fill="none" />
+    <!-- Bug legs -->
+    <path d="M-50,-20 Q-100,-10 -120,30" stroke="#e74c3c" stroke-width="6" fill="none" />
+    <path d="M50,-20 Q100,-10 120,30" stroke="#e74c3c" stroke-width="6" fill="none" />
+    <path d="M-55,20 Q-110,30 -130,70" stroke="#e74c3c" stroke-width="6" fill="none" />
+    <path d="M55,20 Q110,30 130,70" stroke="#e74c3c" stroke-width="6" fill="none" />
+    <path d="M-45,60 Q-90,90 -100,130" stroke="#e74c3c" stroke-width="6" fill="none" />
+    <path d="M45,60 Q90,90 100,130" stroke="#e74c3c" stroke-width="6" fill="none" />
+  </g>
+  
+  <!-- Magnifying glass -->
+  <g transform="translate(1200, 400) rotate(30)">
+    <circle cx="0" cy="0" r="100" fill="none" stroke="#2c3e50" stroke-width="12" opacity="0.8" />
+    <line x1="70" y1="70" x2="150" y2="150" stroke="#2c3e50" stroke-width="20" stroke-linecap="round" opacity="0.8" />
+    <circle cx="0" cy="0" r="90" fill="none" stroke="#3498db" stroke-width="3" opacity="0.5" />
+  </g>
+  
+  <!-- Target/crosshair over bug -->
+  <g transform="translate(200, 300)" opacity="0.8">
+    <circle cx="0" cy="0" r="110" fill="none" stroke="#e74c3c" stroke-width="3" stroke-dasharray="10 5" />
+    <circle cx="0" cy="0" r="130" fill="none" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5 10" />
+    <line x1="-150" y1="0" x2="150" y2="0" stroke="#e74c3c" stroke-width="2" />
+    <line x1="0" y1="-150" x2="0" y2="150" stroke="#e74c3c" stroke-width="2" />
+  </g>
+  
+  <!-- Code brackets -->
+  <g transform="translate(500, 200)" opacity="0.6">
+    <text x="0" y="0" font-family="monospace" font-size="120" fill="#2c3e50">{</text>
+  </g>
+  
+  <g transform="translate(1400, 800)" opacity="0.6">
+    <text x="0" y="0" font-family="monospace" font-size="120" fill="#2c3e50">}</text>
+  </g>
+  
+  <!-- Small bug elements scattered around -->
+  <g transform="translate(1000, 200) scale(0.3)" fill="#9b59b6" opacity="0.5">
+    <ellipse cx="0" cy="0" rx="60" ry="80" />
+    <circle cx="0" cy="-100" r="40" />
+  </g>
+  
+  <g transform="translate(500, 700) scale(0.2)" fill="#16a085" opacity="0.4">
+    <ellipse cx="0" cy="0" rx="60" ry="80" />
+    <circle cx="0" cy="-100" r="40" />
+  </g>
+  
+  <!-- Debugging symbols -->
+  <g transform="translate(1500, 200)" opacity="0.7">
+    <text x="0" y="0" font-family="monospace" font-size="30" fill="#e67e22">DEBUG</text>
+  </g>
+  
+  <g transform="translate(300, 800)" opacity="0.7">
+    <text x="0" y="0" font-family="monospace" font-size="30" fill="#27ae60">FIX</text>
+  </g>
+</svg>

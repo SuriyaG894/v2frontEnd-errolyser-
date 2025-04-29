@@ -39,10 +39,10 @@ table.table.table-striped tbody tr:nth-child(odd) {
 }
 
 .login-container {
-  /* background-image: url('/assets/bg2.jpg'); 
+  background-image: url('/assets/bug-finder-background.svg'); 
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat; */
+  background-repeat: no-repeat;
   height: 100vh;
   display: flex;
     align-items: center;

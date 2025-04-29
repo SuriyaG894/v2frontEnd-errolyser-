@@ -10,14 +10,16 @@ import { CommonModule } from '@angular/common';
   styleUrl: './error-details.component.css'
 })
 export class ErrorDetailsComponent implements OnInit {
+  username:string=''
   ngOnInit(): void {
     this.loadErrorDetails();
+    this.username = localStorage.getItem('token') || ''
   }
 
   errorDetailsList:ErrorDetails[]=[]
   constructor(private errorDetailsService:ErrorAnalyzerServiceService){}
   loadErrorDetails(){
-    this.errorDetailsService.getAllErrorDetails().subscribe(data=>{
+    this.errorDetailsService.getAllErrorDetails(this.username).subscribe(data=>{
       this.errorDetailsList = data;
     });
   }

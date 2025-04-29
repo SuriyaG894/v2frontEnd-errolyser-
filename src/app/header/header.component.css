@@ -7,7 +7,7 @@
   /* Sidebar */
   .sidebar {
     background-color: #1e1e2f;
-    width: 150px;
+    width: 180px;
     transition: width 0.3s ease;
     padding: 10px;
     color: white;
@@ -38,6 +38,7 @@
     transition: margin-left 0.3s ease;
     display: flex;
     flex-direction: column;
+    position: relative;
   }
   
   .navbar {
@@ -45,7 +46,7 @@
     align-items: center;
     background-color: #fafafa;
     padding: 10px 20px;
-    height: 64px;
+    height: 75px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   

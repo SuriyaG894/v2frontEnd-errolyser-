@@ -20,6 +20,7 @@ interface ErrorDetails {
   relevantCode: string;
   timestamp?: Date;
   errortype:string;
+  username:string
 }
 
 @Component({
@@ -34,10 +35,13 @@ export class BasicComponent implements OnInit {
   showResult: boolean = false;
   isSaving: boolean = false;
   saveMessage: string = '';
-
+  username:string=''
   constructor(private errorService: ErrorAnalyzerServiceService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.username=localStorage.getItem('token') || ''
+    console.log(this.username)
+  }
 
   onSearchChange() {
     const input = this.errorText.trim();
@@ -53,6 +57,12 @@ export class BasicComponent implements OnInit {
     if (!this.errorDetails) {
       return;
     }
+
+    this.username = localStorage.getItem('token') || ''
+
+    if(this.errorDetails){
+      this.errorDetails.username = this.username
+    }
     
     this.showResult = true;
     
@@ -62,6 +72,7 @@ export class BasicComponent implements OnInit {
     
     this.errorService.saveErrorDetails(this.errorDetails).subscribe({
       next: (response) => {
+        this.username = localStorage.getItem('token') || ''
         this.isSaving = false;
         this.saveMessage = 'Error details saved successfully!';
         // Update with ID from the server
@@ -77,7 +88,8 @@ export class BasicComponent implements OnInit {
             stackTrace: this.errorDetails?.stackTrace || [], 
             relevantCode: this.errorDetails?.relevantCode || '',
             lineNumber: this.errorDetails?.lineNumber ?? null,
-            errortype:this.errorDetails?.errortype || ''
+            errortype:this.errorDetails?.errortype || '',
+            username:this.username
           };
         }
       },
@@ -88,7 +100,7 @@ export class BasicComponent implements OnInit {
       }
     });
   }
-
+ 
   extractErrorDetails(input: string): ErrorDetails {
     // Initialize the error details object
     const errorDetails: ErrorDetails = {
@@ -99,7 +111,8 @@ export class BasicComponent implements OnInit {
       fileName: '',
       stackTrace: [],
       relevantCode: '',
-      errortype:''
+      errortype:'',
+      username:this.username
     };
 
     // Generic patterns for different languages
@@ -203,6 +216,10 @@ export class BasicComponent implements OnInit {
     const codeSnippetMatch = input.match(/(?:\d+\s*\|.*\n){1,5}/);
     if (codeSnippetMatch) {
       errorDetails.relevantCode = codeSnippetMatch[0].trim();
+    }
+
+    if(!errorDetails.username){
+      errorDetails.username = localStorage.getItem('token') || ''
     }
 
     return errorDetails;

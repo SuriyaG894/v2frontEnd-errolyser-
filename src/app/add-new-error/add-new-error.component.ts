@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 export class AddNewErrorComponent {
 
   addErrorForm:FormGroup;
-  errorData:ErrorDTO={title:'',category:'',howToFix:'',beforeExample:'',afterExample:'',notes:'',stacktrace:''};
+  errorData:ErrorDTO={title:'',category:'',howToFix:'',beforeExample:'',afterExample:'',notes:'',stacktrace:'',username:''};
 
   constructor(private fb:FormBuilder,private errorService:ErrorAnalyzerServiceService,private router:Router){
     this.addErrorForm = this.fb.group({
@@ -24,7 +24,8 @@ export class AddNewErrorComponent {
       beforeExample:['',Validators.required],
       afterExample:['',Validators.required],
       notes:['',Validators.required],
-      stacktrace:['',Validators.required]
+      stacktrace:['',Validators.required],
+      username:localStorage.getItem('token') || ''
     });
   }
   ngOnInit(): void {
@@ -46,7 +47,7 @@ export class AddNewErrorComponent {
       this.errorData = this.addErrorForm.value;
       this.errorService.saveNewError(this.errorData).subscribe(()=>{
         console.log(this.errorData);
-        this.router.navigate(['/errorList']);
+        this.router.navigate(['/repo']);
       })
     }
     else{

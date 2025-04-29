@@ -9,4 +9,5 @@ export interface ErrorDetails {
     relevantCode: string;
     timestamp?: Date;
     errortype:string;
+    username:string;
   }

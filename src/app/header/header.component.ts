@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
@@ -15,15 +15,20 @@ import { AuthService } from '../auth.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   isCollapsed:boolean=false;
-  constructor(private router:Router,private authService:AuthService){}
+  username:string;
+  constructor(private router:Router,private authService:AuthService){
+    this.username="";
+  }
   menuItems = [
     {"icon":"home","label":"Home","route":"home"},
     {"icon":"code_blocks","label":"Console","route":"console"},
     {"icon":"description","label":"Log","route":"log"},
     {"icon":"menu_book","label":"Repo","route":"repo"},
-    {"icon":"history","label":"History","route":"history"}
+    {"icon":"history","label":"History","route":"history"},
+    {"icon":"hub","label":"Community","route":"community"},
+    
     
   ]
   toggleSidebar() {
@@ -33,5 +38,9 @@ export class HeaderComponent {
   logout(){
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  ngOnInit(): void {
+      this.username = localStorage.getItem('token') || "User";
   }
 }

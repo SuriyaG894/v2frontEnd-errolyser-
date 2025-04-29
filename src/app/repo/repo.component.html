@@ -1,12 +1,12 @@
-<div class="container mt-4">
-  <h2 class="text-center mb-4">Repository / Community</h2>
-
+<div class="container mt-1">
+  <h3 style="display: inline" class="mb-4">Repository</h3>
+  <p  class="slogan" style="margin-top: 8px;">Join the hive mind of debugging brilliance.</p>
   <!-- Flex row with buttons on both ends -->
   <div class="d-flex justify-content-between align-items-center mb-3">
     <!-- Left Button -->
     <a
       class="btn"
-      style="height: 40px; padding: 7px 15px; background-color: #1E293B; color: aliceblue;margin-left: 70px;"
+      style="height: 40px; padding: 7px 15px; background-color: #1E293B; color: aliceblue;"
       routerLink="/addNewError"
       routerLinkActive="active"
     >
@@ -25,7 +25,7 @@
   </div>
 
   <!-- Table Section -->
-  <table class="table table-bordered table-hover mx-auto" style="max-width: 900px;">
+  <table class="table table-bordered table-hover" >
     <thead class="table-dark text-center">
       <tr>
         <th>ID</th>
@@ -35,8 +35,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let error of filteredErrors" class="text-center">
-        <td>{{ error.id }}</td>
+      <tr *ngFor="let error of filteredErrors;let i = index" class="text-center">
+        <td>{{  i+1 }}</td>
         <td>{{ error.title }}</td>
         <td>{{ error.category }}</td>
         <td>

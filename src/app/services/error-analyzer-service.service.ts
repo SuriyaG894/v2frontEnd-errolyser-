@@ -30,8 +30,8 @@ export class ErrorAnalyzerServiceService {
   
 
   // Get all error details
-  public getAllErrorDetails(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/getAllErrorDetails`);
+  public getAllErrorDetails(username:string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/getAllErrorDetails/${username}`);
   }
 
   // Get error details by ID
@@ -48,5 +48,14 @@ export class ErrorAnalyzerServiceService {
     return this.http.get<any>(`http://localhost:8080/search`, {
       params: new HttpParams().set('type', etype)
     });
+  }
+
+  //Get errorDetails Count
+  public getConsoleErrorCount(username:string):Observable<any>{
+    return this.http.get(`${this.baseUrl}/getConsoleErrorCount/${username}`);
+  }
+
+  public getConsoleErrorByExceptionType(exceptionType:string,username:string):Observable<any>{
+    return this.http.get(`${this.baseUrl}/getConsoleErrorByException/${exceptionType}/${username}`)
   }
 }

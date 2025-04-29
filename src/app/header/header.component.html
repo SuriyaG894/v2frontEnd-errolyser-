@@ -16,16 +16,27 @@
         <mat-icon>{{ item.icon }}</mat-icon>
         <span *ngIf="!isCollapsed">{{ item.label }}</span>
       </a>
+
+      <a style="position:absolute;bottom:0px;width:130px" routerLink="/help"
+         routerLinkActive="active-link"
+         [routerLinkActiveOptions]="{exact:true}"
+         class="menu-item">
+         <mat-icon>help</mat-icon>
+         <span *ngIf="!isCollapsed">Help</span>
+      </a>
     </div>
   
     <!-- Main Content Area -->
     <div class="main-content" [class.expanded]="!isCollapsed">
       <div class="navbar">
-        <img src="./assets/logo.png" width="40" />
+        <img src="./assets/logo.png" width="45" style="margin-top:-5px ;" />
         <h2>ERRORLYZER <i style="font-size: 14px;color:grey">Debug Less. Build More.</i></h2>
+        
         <span class="spacer"></span>
         <mat-icon style="color:#1e1e2f;cursor: pointer;" (click)="logout()">logout</mat-icon>
+        <p style="position: absolute;left: 76px;top:52px;">Welcome, {{username}}</p>
       </div>
+      
   
       <div class="page-content">
         <router-outlet></router-outlet>

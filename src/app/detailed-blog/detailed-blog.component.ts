@@ -19,7 +19,8 @@ export class DetailedBlogComponent {
     beforeExample: '',
     afterExample: '',
     notes: '',
-    stacktrace:''
+    stacktrace:'',
+    username:''
   };
   constructor(private activatedRouter: ActivatedRoute,private errorService:ErrorServiceService,private router:Router,private errorDetailsService:ErrorAnalyzerServiceService) {
     this.id = this.activatedRouter?.snapshot?.queryParamMap?.get("Id") || '';

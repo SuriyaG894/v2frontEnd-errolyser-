@@ -14,6 +14,8 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { MainlayoutComponent } from './mainlayout/mainlayout.component';
 import { AuthGuard } from '../auth.guard';
+import { HelpComponentComponent } from './help-component/help-component.component';
+import { CommunityComponent } from './community/community.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -38,6 +40,8 @@ export const routes: Routes = [
       { path: 'userList', component: ErrorDetailsComponent },
       { path: 'addNewError', component: AddNewErrorComponent },
       { path: 'history', component: HistoryComponent },
+      {path:'help',component:HelpComponentComponent},
+      {path:'community',component:CommunityComponent}
     ],
   },
 
